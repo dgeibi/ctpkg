@@ -3,5 +3,5 @@
 for dir in ./ct*
 do
     cd $dir
-    makepkg -rsi --noconfirm && cd ..
+    makepkg -rsi --noconfirm --needed && cd ..
 done
