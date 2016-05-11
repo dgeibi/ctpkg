@@ -1,0 +1,15 @@
+[Unit]
+Description=A local DNS server based on WinPcap and LibPcap
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+WorkingDirectory=/usr/share/pcap-dnsproxy
+ExecStart=/usr/share/pcap-dnsproxy/Pcap_DNSProxy -c /home/dgeibi/.config/pcap-dnsproxy
+GuessMainPID=yes
+Restart=on-failure
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target

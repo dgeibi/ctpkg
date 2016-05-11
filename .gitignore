@@ -2,3 +2,4 @@
 ct*/*
 !ct*/PKGBUILD
 !ct*/*.install
+!ct*/*.service

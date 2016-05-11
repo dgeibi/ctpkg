@@ -1,0 +1,50 @@
+# copy from https://aur.archlinux.org/cgit/aur.git/tree/PKGBUILD?h=pcap-dnsproxy-git
+
+pkgname=ct-pcap-dnsproxy
+_pkgname=pcap-dnsproxy
+pkgver=$(curl https://raw.githubusercontent.com/chengr28/Pcap_DNSProxy/master/README.md | grep -A1 Updated | grep '\*\*[0-9].[0-9].[0-9].[0-9]\*\*' | tr -d '\*')
+pkgrel=1
+pkgdesc="A local DNS server base on WinPcap and LibPcap."
+arch=(i686 x86_64)
+url="https://github.com/chengr28/Pcap_DNSProxy"
+license=('GPL2')
+depends=('libpcap' 'libsodium')
+makedepends=('git' 'cmake' 'sh' 'm4' 'bison' 'flex' 'gcc')
+provides=('pcap-dnsproxy')
+replaces=('pcap-dnsproxy-git' 'pcap-dnsproxy')
+conflicts=('pcap-dnsproxy-git' 'pcap-dnsproxy')
+_fullsha1=$(git ls-remote -h -q $url master | awk '{print $1}')
+source=("$url/archive/${_fullsha1}.zip"
+        "${_pkgname}.service")
+install="${_pkgname}.install"
+md5sums=('SKIP' 'SKIP')
+_archivename=Pcap_DNSProxy-${_fullsha1}
+
+
+build() {
+    cd "${srcdir}/${_archivename}/Source/Scripts"
+    sh ./Linux_Build.sh
+}
+
+package() {
+    cd "${srcdir}/${_archivename}/Source/Release"
+
+    install -Dm777 "Pcap_DNSProxy" "${pkgdir}/usr/share/${_pkgname}/Pcap_DNSProxy"
+    install -Dm777 "KeyPairGenerator" "${pkgdir}/usr/share/${_pkgname}/KeyPairGenerator"
+
+    install -Dm644 ./{*.conf,*.txt} "${pkgdir}/usr/share/${_pkgname}/"
+    install -dm755 "${pkgdir}/etc/${_pkgname}/"
+    ln -s "/usr/share/${_pkgname}/Config.conf" "${pkgdir}/etc/${_pkgname}/Config.conf"
+    ln -s "/usr/share/${_pkgname}/Hosts.conf" "${pkgdir}/etc/${_pkgname}/Hosts.conf"
+    ln -s "/usr/share/${_pkgname}/IPFilter.conf" "${pkgdir}/etc/${_pkgname}/IPFilter.conf"
+    ln -s "/usr/share/${_pkgname}/Routing.txt" "${pkgdir}/etc/${_pkgname}/Routing.txt"
+    ln -s "/usr/share/${_pkgname}/WhiteList.txt" "${pkgdir}/etc/${_pkgname}/WhiteList.txt"
+
+    install -Dm644 "${srcdir}/${_pkgname}.service" "${pkgdir}/usr/lib/systemd/system/${_pkgname}.service"
+
+    cd "${srcdir}/${_archivename}/Documents"
+    find . -type f -exec install -Dm644 {} \
+        "${pkgdir}/usr/share/doc/${_pkgname}/{}" \;
+
+    install -Dm644 "${srcdir}/${_archivename}/LICENSE" "${pkgdir}/usr/share/licenses/${_pkgname}/LICENSE"
+}
