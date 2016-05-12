@@ -1,10 +1,10 @@
 pre_upgrade() {
-    diff -u /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/Config.conf > /etc/pcap-dnsproxy/backup.patch || echo "Config.conf was altered."
+    cp /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/preconfig
 }
 
 post_upgrade() {
-    cp /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/
-    patch /etc/pcap-dnsproxy/Config.conf < /etc/pcap-dnsproxy/backup.patch
+    diff -u /etc/pcap-dnsproxy/preconfig /usr/share/pcap-dnsproxy/Config.conf  > /etc/pcap-dnsproxy/update.patch || echo "Config.conf Example was updated."
+    patch /etc/pcap-dnsproxy/Config.conf < /etc/pcap-dnsproxy/update.patch
     [[ -f /etc/pcap-dnsproxy/Error.log ]] && rm /etc/pcap-dnsproxy/Error.log || echo "Error.log not found"
 }
 
