@@ -34,7 +34,6 @@ package() {
 
     install -Dm644 ./{*.conf,*.txt} "${pkgdir}/usr/share/${_pkgname}/"
     install -dm755 "${pkgdir}/etc/${_pkgname}/"
-    ln -s "/usr/share/${_pkgname}/Config.conf" "${pkgdir}/etc/${_pkgname}/Config.conf"
     ln -s "/usr/share/${_pkgname}/Hosts.conf" "${pkgdir}/etc/${_pkgname}/Hosts.conf"
     ln -s "/usr/share/${_pkgname}/IPFilter.conf" "${pkgdir}/etc/${_pkgname}/IPFilter.conf"
     ln -s "/usr/share/${_pkgname}/Routing.txt" "${pkgdir}/etc/${_pkgname}/Routing.txt"

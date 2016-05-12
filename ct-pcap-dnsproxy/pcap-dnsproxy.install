@@ -1,3 +1,7 @@
+post_install() {
+    [[ ! -f /etc/pcap-dnsproxy/Config.conf ]] && cp /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/
+}
+
 pre_remove() {
-    rm -f /usr/share/pcap-dnsproxy/Error.log
+    rm -f /etc/pcap-dnsproxy/Error.log
 }
