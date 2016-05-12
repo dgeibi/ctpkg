@@ -1,7 +1,13 @@
-post_install() {
-    [[ ! -f /etc/pcap-dnsproxy/Config.conf ]] && cp /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/
+pre_upgrade() {
+    diff -u /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/Config.conf > /etc/pcap-dnsproxy/backup.patch || echo "Config.conf was altered."
 }
 
-pre_remove() {
-    rm -f /etc/pcap-dnsproxy/Error.log
+post_upgrade() {
+    cp /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/
+    patch /etc/pcap-dnsproxy/Config.conf < /etc/pcap-dnsproxy/backup.patch
+    [[ -f /etc/pcap-dnsproxy/Error.log ]] && rm /etc/pcap-dnsproxy/Error.log || echo "Error.log not found"
+}
+
+post_install() {
+    cp /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/
 }
