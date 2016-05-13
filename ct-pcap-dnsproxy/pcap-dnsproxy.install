@@ -1,13 +1,30 @@
+post_install() {
+    if [ ! -f /etc/pcap-dnsproxy/Config.conf.pacsave ];then
+        cp /etc/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/Config.conf.pacold
+    else
+        cp /etc/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/Config.conf.pacnew
+        cp /etc/pcap-dnsproxy/Config.conf.pacsave /etc/pcap-dnsproxy/Config.conf
+        if [ -f /etc/pcap-dnsproxy/Config.conf.pacold ];then
+            diff -u /etc/pcap-dnsproxy/Config.conf.pacold /etc/pcap-dnsproxy/Config.conf.pacnew > /etc/pcap-dnsproxy/update.patch || echo "Config.conf Example was updated."
+            patch /etc/pcap-dnsproxy/Config.conf < /etc/pcap-dnsproxy/update.patch
+        fi
+    fi
+}
+
+pre_install() {
+    if [ -f /etc/pcap-dnsproxy/Config.conf.pacnew ]; then
+        cp /etc/pcap-dnsproxy/Config.conf.pacnew /etc/pcap-dnsproxy/Config.conf.pacold
+    fi
+}
+
 pre_upgrade() {
-    cp /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/preconfig
+    pre_install
 }
 
 post_upgrade() {
-    diff -u /etc/pcap-dnsproxy/preconfig /usr/share/pcap-dnsproxy/Config.conf  > /etc/pcap-dnsproxy/update.patch || echo "Config.conf Example was updated."
-    patch /etc/pcap-dnsproxy/Config.conf < /etc/pcap-dnsproxy/update.patch
+    if [ -f /etc/pcap-dnsproxy/Config.conf.pacnew ]; then
+        diff -u /etc/pcap-dnsproxy/Config.conf.pacold /etc/pcap-dnsproxy/Config.conf.pacnew > /etc/pcap-dnsproxy/update.patch || echo "Config.conf Example was updated."
+        patch /etc/pcap-dnsproxy/Config.conf < /etc/pcap-dnsproxy/update.patch
+    fi
     [[ -f /etc/pcap-dnsproxy/Error.log ]] && rm /etc/pcap-dnsproxy/Error.log || echo "Error.log not found"
-}
-
-post_install() {
-    cp /usr/share/pcap-dnsproxy/Config.conf /etc/pcap-dnsproxy/
 }

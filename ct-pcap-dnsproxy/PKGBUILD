@@ -8,6 +8,7 @@ pkgdesc="A local DNS server base on WinPcap and LibPcap."
 arch=(i686 x86_64)
 url="https://github.com/chengr28/Pcap_DNSProxy"
 license=('GPL2')
+backup=(etc/"$_pkgname"/Config.conf)
 depends=('libpcap' 'libsodium')
 makedepends=('git' 'cmake' 'm4' 'bison' 'flex' 'gcc')
 provides=('pcap-dnsproxy')
@@ -34,14 +35,8 @@ package() {
 
     install -Dm777 "Pcap_DNSProxy" "${pkgdir}/usr/share/${_pkgname}/Pcap_DNSProxy"
     install -Dm777 "KeyPairGenerator" "${pkgdir}/usr/share/${_pkgname}/KeyPairGenerator"
-
-    install -Dm644 ./{*.conf,*.txt} "${pkgdir}/usr/share/${_pkgname}/"
     install -dm755 "${pkgdir}/etc/${_pkgname}/"
-    ln -s "/usr/share/${_pkgname}/Hosts.conf" "${pkgdir}/etc/${_pkgname}/Hosts.conf"
-    ln -s "/usr/share/${_pkgname}/IPFilter.conf" "${pkgdir}/etc/${_pkgname}/IPFilter.conf"
-    ln -s "/usr/share/${_pkgname}/Routing.txt" "${pkgdir}/etc/${_pkgname}/Routing.txt"
-    ln -s "/usr/share/${_pkgname}/WhiteList.txt" "${pkgdir}/etc/${_pkgname}/WhiteList.txt"
-
+    install -Dm644 ./{*.conf,*.txt} "${pkgdir}/etc/${_pkgname}/"
     install -Dm644 "${srcdir}/${_pkgname}.service" "${pkgdir}/usr/lib/systemd/system/${_pkgname}.service"
 
     cd "${srcdir}/${_archivename}/Documents"
