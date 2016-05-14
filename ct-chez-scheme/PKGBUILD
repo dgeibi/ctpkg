@@ -1,5 +1,5 @@
 pkgname=ct-chez-scheme
-pkgver=9.4.0d0d415f
+pkgver=9.4.d74078ae
 pkgrel=1
 pkgdesc="Chez Scheme is an implementation of the Revised6 Report on Scheme [27] (R6RS) with numerous language and programming environment extensions. (threaded build)"
 arch=(i686 x86_64)
