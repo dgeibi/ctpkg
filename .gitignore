@@ -1,5 +1,4 @@
-*.tar.xz
-ct*/*
-!ct*/PKGBUILD
-!ct*/*.install
-!ct*/*.service
+**/ct*/*
+!PKGBUILD
+!*.install
+!*.service
