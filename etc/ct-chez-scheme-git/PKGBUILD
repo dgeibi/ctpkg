@@ -1,0 +1,30 @@
+pkgname=ct-chez-scheme-git
+_pkgname=ChezScheme
+pkgver=9.4.4bd78a6
+pkgrel=1
+pkgdesc="Chez Scheme is an implementation of the Revised6 Report on Scheme [27] (R6RS) with numerous language and programming environment extensions. (threaded build)"
+arch=(i686 x86_64)
+url="https://github.com/cisco/ChezScheme"
+depends=()
+license=('APL')
+makedepends=('binutils' 'make' 'git' 'ncurses' 'libx11' 'xproto')
+conflicts=('petite-chez-scheme' 'chez-scheme-git')
+replaces=('petite-chez-scheme' 'chez-scheme-git')
+source=('git+https://github.com/cisco/ChezScheme.git')
+sha1sums=('SKIP')
+
+pkgver() {
+    cd "${srcdir}/${_pkgname}"
+    echo 9.4.$(git log -1 --pretty=format:%h)
+}
+
+build() {
+    cd "${srcdir}/${_pkgname}"
+    ./configure --installprefix=/usr --temproot=$pkgdir
+    make
+}
+
+package() {
+    cd "${srcdir}/${_pkgname}"
+    make install DESTDIR="$pkgdir"
+}
