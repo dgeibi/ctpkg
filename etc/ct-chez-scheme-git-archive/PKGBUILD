@@ -1,0 +1,36 @@
+pkgname=ct-chez-scheme
+pkgver=9.4.1.0f0468ff
+pkgrel=1
+pkgdesc="Chez Scheme is an implementation of the Revised6 Report on Scheme [27] (R6RS) with numerous language and programming environment extensions. (threaded build)"
+arch=(i686 x86_64)
+url="https://github.com/cisco/ChezScheme"
+depends=()
+license=('APL')
+makedepends=('binutils' 'make' 'git' 'ncurses' 'libx11' 'xproto')
+conflicts=('petite-chez-scheme' 'chez-scheme-git')
+replaces=('petite-chez-scheme' 'chez-scheme-git')
+_fullsha1=$(git ls-remote -h -q $url master | awk '{print $1}')
+source=("$url/archive/${_fullsha1}.zip")
+sha1sums=('SKIP')
+_shortsha1=$(echo "${_fullsha1}" | head -c 8)
+_archivename=ChezScheme-${_fullsha1}
+
+pkgver() {
+    echo 9.4.1.${_shortsha1}
+}
+
+build() {
+    cd "$srcdir/${_archivename}" || exit
+    git init
+    rm -rf nanopass/ stex/ zlib/
+    git submodule add git@github.com:nanopass/nanopass-framework-scheme.git nanopass
+    git submodule add git@github.com:dybvig/stex.git stex
+    git submodule add git@github.com:madler/zlib.git zlib
+    ./configure --installprefix=/usr --temproot=$pkgdir
+    make
+}
+
+package() {
+    cd "${srcdir}/${_archivename}" || exit
+    make install DESTDIR="$pkgdir"
+}
