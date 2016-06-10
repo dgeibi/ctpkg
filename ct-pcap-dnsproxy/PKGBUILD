@@ -30,7 +30,6 @@ package() {
     cd "${srcdir}/${_archivename}/Source/Release"
 
     install -Dm777 "Pcap_DNSProxy" "${pkgdir}/usr/share/${_pkgname}/Pcap_DNSProxy"
-    install -Dm777 "KeyPairGenerator" "${pkgdir}/usr/share/${_pkgname}/KeyPairGenerator"
     install -dm755 "${pkgdir}/etc/${_pkgname}/"
     install -Dm644 ./{*.conf,*.txt} "${pkgdir}/etc/${_pkgname}/"
     install -Dm644 "${srcdir}/${_pkgname}.service" "${pkgdir}/usr/lib/systemd/system/${_pkgname}.service"
