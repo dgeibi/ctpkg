@@ -23,7 +23,8 @@ _archivename=Pcap_DNSProxy-${_fullsha1}
 
 build() {
     cd "${srcdir}/${_archivename}/Source/Scripts"
-    sh ./Linux_Build.sh
+    chmod 755 ./CMake_Build.sh
+    ./CMake_Build.sh
 }
 
 package() {

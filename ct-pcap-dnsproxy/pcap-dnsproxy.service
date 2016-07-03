@@ -1,5 +1,5 @@
 [Unit]
-Description=A local DNS server based on WinPcap and LibPcap
+Description=Pcap_DNSProxy
 After=network.target
 Wants=network-online.target
 
