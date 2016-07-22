@@ -8,8 +8,8 @@ url="https://github.com/cisco/ChezScheme"
 depends=()
 license=('APL')
 makedepends=('binutils' 'make' 'git' 'ncurses' 'libx11' 'xproto')
-conflicts=('petite-chez-scheme' 'chez-scheme-git')
-replaces=('petite-chez-scheme' 'chez-scheme-git')
+conflicts=('petite-chez-scheme' 'chez-scheme-git' 'chez-scheme')
+replaces=('petite-chez-scheme' 'chez-scheme-git' 'chez-scheme')
 source=('git+https://github.com/cisco/ChezScheme.git')
 sha1sums=('SKIP')
 
