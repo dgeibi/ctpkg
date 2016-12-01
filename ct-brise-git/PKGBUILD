@@ -1,0 +1,31 @@
+# $Id$
+# Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Contributor: GONG Chen <chen dot sst at gmail dot com>
+
+pkgname=ct-brise-git
+pkgver=r715.0b4a410
+pkgrel=1
+pkgdesc="Rime schema repository"
+arch=('i686' 'x86_64')
+url="https://github.com/rime/brise"
+license=('GPL3')
+makedepends=('cmake' 'git' 'ct-librime-git')
+conflicts=('brise')
+source=("git+https://github.com/rime/brise.git")
+sha512sums=('SKIP')
+_gitname="brise"
+
+pkgver() {
+    cd "$srcdir/${_gitname}"
+    printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
+build() {
+  cd $_gitname
+  make
+}
+
+package() {
+  cd $_gitname
+  make DESTDIR="$pkgdir" install
+}
