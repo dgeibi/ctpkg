@@ -3,7 +3,7 @@
 # Contributor: GONG Chen <chen dot sst at gmail dot com>
 
 pkgname=ct-brise-git
-pkgver=r715.0b4a410
+pkgver=r717.1cfb0fe
 pkgrel=1
 pkgdesc="Rime schema repository"
 arch=('i686' 'x86_64')
