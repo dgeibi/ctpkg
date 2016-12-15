@@ -2,7 +2,7 @@
 
 pkgname=ct-pcap-dnsproxy
 _pkgname=pcap-dnsproxy
-pkgver="$(curl https://raw.githubusercontent.com/chengr28/Pcap_DNSProxy/master/README.md | grep -A1 Updated | grep '\*\*[0-9].[0-9].[0-9].[0-9]\*\*' | tr -d '\*')"
+pkgver="$(curl https://raw.githubusercontent.com/chengr28/Pcap_DNSProxy/master/README.md | grep -A1 Updated | grep -E '\*\*[0-9]+.[0-9]+.[0-9]+.[0-9]+\*\*' | tr -d '\*')"
 pkgrel=1
 pkgdesc="A local DNS server base on WinPcap and LibPcap."
 arch=(i686 x86_64)
