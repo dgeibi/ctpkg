@@ -4,7 +4,7 @@
 # Contributor: 網軍總司令
 
 pkgname=ct-librime-git
-pkgver=r1136.ae13354
+pkgver=r1136.ae13354d
 pkgrel=1
 epoch=1
 pkgdesc="Rime input method engine"
