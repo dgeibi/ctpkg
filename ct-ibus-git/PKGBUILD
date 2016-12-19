@@ -3,7 +3,7 @@
 
 pkgbase=ct-ibus-git
 pkgname=(ct-ibus-git ct-libibus-git)
-pkgver=r2612.52b7272
+pkgver=r2612.52b7272d
 pkgrel=1
 pkgdesc="Next Generation Input Bus for Linux"
 arch=('i686' 'x86_64')
