@@ -1,4 +1,5 @@
 **/ct*/*
+**/ttf*/*
 !PKGBUILD
 !*.install
 !*.service
