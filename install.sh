@@ -1,8 +1,10 @@
 #!/bin/bash
 
-for dir in ./ct-*
+export iosevka_ver="$(git ls-remote -t https://github.com/be5invis/Iosevka | sort -t '/' -k 3 -V -r | grep -m 1 -oE '[0-9]+\.[0-9]+\.[0-9]+[a-z]?')"
+
+for dir in ./ct-* ./ttf-*
 do
     cd "$dir" || exit
     rm -f ./*.part
-    makepkg -rsicC --needed && cd .. || exit
+    makepkg -rsicC --needed --noconfirm && cd .. || exit
 done
