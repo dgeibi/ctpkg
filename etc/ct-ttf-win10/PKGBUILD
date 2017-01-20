@@ -5,7 +5,6 @@ pkgdesc="win10 fonts"
 arch=(any)
 depends=(fontconfig xorg-font-utils)
 conflicts=(ttf-vista-fonts)
-install=${pkgname}.install
 
 package() {
   install -d "$pkgdir/usr/share/fonts/TTF"
