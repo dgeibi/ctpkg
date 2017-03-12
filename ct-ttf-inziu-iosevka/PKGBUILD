@@ -13,5 +13,6 @@ source=(http://7xpdnl.dl1.z0.glb.clouddn.com/inziu-iosevka-$pkgver.7z)
 md5sums=('SKIP')
 
 package () {
+      install -d ${pkgdir}/usr/share/fonts/ttc/
       install -Dm644 ${srcdir}/*.ttc -t "${pkgdir}/usr/share/fonts/ttc"
 }
