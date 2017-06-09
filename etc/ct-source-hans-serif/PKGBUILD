@@ -1,0 +1,13 @@
+pkgname=ct-source-hans-serif
+pkgver=1.000
+pkgrel=1
+pkgdesc="source hans serif OTC"
+arch=(any)
+depends=(fontconfig xorg-font-utils)
+source=(file:///home/dgeibi/code/ctpkg/ct-source-hans-serif/shserif-OTC-r1.000.7z)
+md5sums=('SKIP')
+
+package() {
+  install -d "$pkgdir/usr/share/fonts/ttc"
+  install -m644 "$srcdir/"*.ttc "$pkgdir/usr/share/fonts/ttc/"
+}

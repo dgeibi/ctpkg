@@ -1,0 +1,13 @@
+pkgname=ct-ttf-source-hans-noto
+pkgver=1.001
+pkgrel=1
+pkgdesc="source hans sans and serif OTC"
+arch=(any)
+depends=(fontconfig xorg-font-utils)
+source=(file:///home/dgeibi/code/ctpkg/ct-ttf-source-hans-noto/SourceHanNotoCJK.ttc)
+md5sums=('SKIP')
+
+package() {
+  install -d "$pkgdir/usr/share/fonts/ttc"
+  install -m644 "$srcdir/"*.ttc "$pkgdir/usr/share/fonts/ttc/"
+}
