@@ -1,0 +1,16 @@
+# copy from https://aur.archlinux.org/packages/ttf-inziu-iosevka/
+
+pkgname=ct-ttf-noto-color-emoji
+pkgver=1.0.1
+pkgrel=1
+pkgdesc="color emoji"
+arch=('any')
+license=('unknown')
+depends=('fontconfig' 'xorg-font-utils')
+source=(file:///home/dgeibi/code/ctpkg/ct-ttf-noto-color-emoji/NotoColorEmoji.ttf)
+md5sums=('SKIP')
+
+package () {
+      install -d ${pkgdir}/usr/share/fonts/ttf/
+      install -Dm644 ${srcdir}/*.ttf -t "${pkgdir}/usr/share/fonts/ttf"
+}
