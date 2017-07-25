@@ -4,5 +4,5 @@ for dir in ./ct-*
 do
     cd "$dir" || exit
     rm -f ./*.part
-    PKGEXT='.pkg.tar' makepkg -rsicC --needed --noconfirm && cd .. || exit
+    PKGEXT='.pkg.tar' makepkg -rsicC --needed && cd .. || exit
 done
