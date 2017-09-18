@@ -1,7 +1,7 @@
 # copy from https://aur.archlinux.org/packages/ttf-inziu-iosevka/
 
 pkgname=ct-ttf-inziu-iosevka
-pkgver=$(curl -L https://be5invis.github.io/Iosevka/inziu.html | grep -m 1 '{version:' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+[a-z]?')
+pkgver=$(curl -sL https://be5invis.github.io/Iosevka/inziu.html | grep -m 1 '{version:' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+[a-z]?' 2> /dev/null)
 pkgrel=1
 pkgdesc="A composite of Iosevka, M+ and Source Han Sans. It is fully hinted and optimized for screen display on every device, and every resolution."
 arch=('any')
